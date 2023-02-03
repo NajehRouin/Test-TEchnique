@@ -7,6 +7,10 @@ import DetailVideo from './src/screens/DetailVideo';
 import { createStackNavigator} from '@react-navigation/stack'
 import { NavigationContainer } from "@react-navigation/native";
 import LoadingAnimationScreen from './src/components/LoadingAnimationScreen';
+
+import { Provider } from 'react-redux'
+import store from './src/stores/store';
+import ReduxHome from './src/screens/ReduxHome';
 const Stack=createStackNavigator();
 
 export default function App() {
