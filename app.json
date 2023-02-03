@@ -1,0 +1,10 @@
+{
+  "expo": {
+    "name": "test_technique",
+    "slug": "test_technique",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
