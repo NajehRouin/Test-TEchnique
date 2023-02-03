@@ -1,12 +1,26 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import HomeScreens from './src/screens/HomeScreens';
+import DetailVideo from './src/screens/DetailVideo';
+//import { createStackNavigator } from '@react-navigation/stack';
+import { createStackNavigator} from '@react-navigation/stack'
+import { NavigationContainer } from "@react-navigation/native";
+import LoadingAnimationScreen from './src/components/LoadingAnimationScreen';
+const Stack=createStackNavigator();
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
+    
+   
+      <NavigationContainer>
+  <Stack.Navigator initialRouteName="Loading">
+  <Stack.Screen name="Accueil" component={HomeScreens} options={{headerShown:false}} />
+  <Stack.Screen name="DetailVideo" component={DetailVideo} options={{headerShown:false}} />
+  <Stack.Screen name="Loading" component={LoadingAnimationScreen} options={{headerShown:false}} />
+  </Stack.Navigator>
+  </NavigationContainer>
     </View>
   );
 }
@@ -14,8 +28,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor:"white"
+
   },
 });
