@@ -1,17 +1,54 @@
-import { StyleSheet, Text, TouchableOpacity, View,Dimensions,Image } from 'react-native'
-import React from 'react'
+import { StyleSheet, Text, TouchableOpacity, View,Dimensions,Image,Animated } from 'react-native'
+import React,{useEffect,useState} from 'react'
+import { Icon } from 'react-native-elements/dist/icons/Icon';
 const SCREEN_WIDTH=Dimensions.get('window').width;
 const VideosItem = (props,OnpressList) => {
+    const currentValue = new Animated.Value(1)
+    const [liked,setLiked]=useState(false);
+
+
+
+    useEffect(()=>{
+
+        if (liked==true){
+            Animated.spring(currentValue,{
+                toValue:3,
+                friction:2,
+                useNativeDriver:true
+            }).start(()=>{
+                Animated.spring(currentValue,{
+                    toValue:1,
+                    useNativeDriver:true,
+                    friction:2
+                }).start(()=>{
+                    setVisible(false)
+                })
+            })
+        }
+    },[liked])
     const uriImage="https://image.tmdb.org/t/p/w300"
   return (
     <View style={styles.container}>
       <TouchableOpacity onPress={props.OnpressList } >
             <View style={styles.cardVideo}>
+         
                 <Image style={styles.images}
                     source={{uri:uriImage+props.backdrop_path}}
                 />
+              
+                 
                 <View style={styles.detailVideo}>
-                     
+               
+                <Animated.View style={{ transform:[{scale:currentValue}]  }}>
+                                        <Icon
+                                                    name="favorite"
+                                                    size={15}
+                                                    color="red"
+                                                    type="material"
+                                        
+                                         />
+                                    </Animated.View>
+         
                                 <Text style={styles.title}>{props.title}</Text>
                                 <Text style={styles.popularity}>popularity: {props.popularity}</Text>
                                 <Text style={styles.description}>{props.overview}</Text>
@@ -20,7 +57,7 @@ const VideosItem = (props,OnpressList) => {
 
                                 
                 </View>
-
+            
 
 
             </View>
@@ -60,7 +97,7 @@ const styles = StyleSheet.create({
        borderTopStartRadius:20,
        borderTopEndRadius:5,
        height:90,
-       padding:5
+      
     },
     detailVideo:{
         justifyContent:'space-between',
